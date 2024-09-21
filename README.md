@@ -1,42 +1,42 @@
-# Go WhatsApp Multi-Device Implementation in REST API
+# Implementación de WhatsApp para múltiples dispositivos en API REST
 
-This repository contains example of implementation [go.mau.fi/whatsmeow](https://go.mau.fi/whatsmeow/) package with Multi-Session/Account Support. This example is using a [labstack/echo](https://github.com/labstack/echo) version 4.x.
+Este repositorio contiene ejemplos de implementación. [go.mau.fi/whatsmeow](https://go.mau.fi/whatsmeow/) paquete con compatibilidad con múltiples sesiones y cuentas. Este ejemplo utiliza un [labstack/echo](https://github.com/labstack/echo) versión 4.x.
 
-## Features
+## Características
 
-- Multi-Session/Account Support
-- Multi-Device Support
-- WhatsApp Authentication (QR Code and Logout)
-- WhatsApp Messaging Send Text
-- WhatsApp Messaging Send Media (Document, Image, Audio, Video, Sticker)
-- WhatsApp Messaging Send Location
-- WhatsApp Messaging Send Contact
-- WhatsApp Messaging Send Link
-- And Much More ...
+- Compatibilidad con múltiples sesiones y cuentas
+- Compatibilidad con múltiples dispositivos
+- Autenticación de WhatsApp (código QR y cierre de sesión)
+- Envío de mensajes de WhatsApp
+- Envío de archivos multimedia (documentos, imágenes, audio, videos, stickers) a través de mensajes de WhatsApp
+- Envío de ubicación a través de mensajes de WhatsApp
+- Envío de contactos a través de mensajes de WhatsApp
+- Envío de enlaces a través de mensajes de WhatsApp
+- Y mucho más...
 
-## Getting Started
+## Primeros pasos
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-See deployment section for notes on how to deploy the project on a live system.
+Estas instrucciones le permitirán obtener una copia del proyecto en funcionamiento en su máquina local para fines de desarrollo y prueba.
+Consulte la sección de implementación para obtener notas sobre cómo implementar el proyecto en un sistema en vivo.
 
-### Prerequisites
+### Requisitos previos
 
-Prequisites packages:
-* Go (Go Programming Language)
-* Swag (Go Annotations Converter to Swagger Documentation)
-* GoReleaser (Go Automated Binaries Build)
-* Make (Automated Execution using Makefile)
+Paquetes de requisitos previos:
+* Go (lenguaje de programación Go)
+* Swag (convertidor de anotaciones Go a documentación Swagger)
+* GoReleaser (compilación automática de binarios Go)
+* Make (ejecución automatizada mediante Makefile)
 
-Optional packages:
-* Docker (Application Containerization)
+Paquetes opcionales:
+* Docker (contenedorización de aplicaciones)
 
-### Deployment
+### Implementación
 
-#### **Using Container**
+#### **Uso de contenedores**
 
-1) Install Docker CE based on the [manual documentation](https://docs.docker.com/desktop/)
+1) Instale Docker CE según el [manual documentation](https://docs.docker.com/desktop/)
 
-2) Run the following command on your Terminal or PowerShell
+2) Ejecute el siguiente comando en su Terminal o PowerShell
 ```sh
 docker run -d \
   -p 3000:3000 \
@@ -44,119 +44,118 @@ docker run -d \
   --rm dimaskiddo/go-whatsapp-multidevice-rest:latest
 ```
 
-3) Now it should be accessible in your machine by accessing `localhost:3000/api/v1/whatsapp` or `127.0.0.1:3000/api/v1/whatsapp`
+3) Ahora debería ser accesible en su máquina accediendo `localhost:3000/api/v1/whatsapp` or `127.0.0.1:3000/api/v1/whatsapp`
 
-4) Try to use integrated API docs that accesible in `localhost:3000/api/v1/whatsapp/docs/` or `127.0.0.1:3000/api/v1/whatsapp/docs/`
+4) Intente utilizar documentos API integrados a los que se pueda acceder en `localhost:3000/api/v1/whatsapp/docs/` or `127.0.0.1:3000/api/v1/whatsapp/docs/`
 
-#### **Using Pre-Build Binaries**
+#### **Uso de binarios prediseñados** 
+1) Descargue los binarios prediseñados desde [release page](https://github.com/dimaskiddo/go-whatsapp-multidevice-rest/releases)
 
-1) Download Pre-Build Binaries from the [release page](https://github.com/dimaskiddo/go-whatsapp-multidevice-rest/releases)
+2) Extraiga el archivo comprimido
 
-2) Extract the zipped file
+3) Copie el `.env.default` archivar como archivo `.env` 
 
-3) Copy the `.env.default` file as `.env` file
-
-4) Run the pre-build binary
+4) Ejecutar el binario pre-compilado
 ```sh
 # MacOS / Linux
 chmod 755 go-whatsapp-multidevice-rest
 ./go-whatsapp-multidevice-rest
 
 # Windows
-# You can double click it or using PowerShell
+# Puede hacer doble clic en él o usar PowerShell
 .\go-whatsapp-multidevice-rest.exe
 ```
 
-5) Now it should be accessible in your machine by accessing `localhost:3000/api/v1/whatsapp` or `127.0.0.1:3000/api/v1/whatsapp`
+5) Ahora debería ser accesible en su máquina accediendo `localhost:3000/api/v1/whatsapp` or `127.0.0.1:3000/api/v1/whatsapp`
 
-6) Try to use integrated API docs that accesible in `localhost:3000/api/v1/whatsapp/docs/` or `127.0.0.1:3000/api/v1/whatsapp/docs/`
+6) Intente utilizar documentos API integrados a los que se pueda acceder en `localhost:3000/api/v1/whatsapp/docs/` or `127.0.0.1:3000/api/v1/whatsapp/docs/`
 
-#### **Build From Source**
+#### **Crear desde el código fuente**
 
-Below is the instructions to make this source code running:
+A continuación se muestran las instrucciones para ejecutar este código fuente:
 
-1) Create a Go Workspace directory and export it as the extended GOPATH directory
+1) Cree un directorio de Go Workspace y expórtelo como el directorio GOPATH extendido
 ```sh
 cd <your_go_workspace_directory>
 export GOPATH=$GOPATH:"`pwd`"
 ```
 
-2) Under the Go Workspace directory create a source directory
+2) En el directorio Go Workspace crea un directorio de origen
 ```sh
 mkdir -p src/github.com/dimaskiddo/go-whatsapp-multidevice-rest
 ```
 
-3) Move to the created directory and pull codebase
+3) Muévete al directorio creado y extrae el código base
 ```sh
 cd src/github.com/dimaskiddo/go-whatsapp-multidevice-rest
 git clone -b master https://github.com/dimaskiddo/go-whatsapp-multidevice-rest.git .
 ```
 
-4) Run following command to pull vendor packages
+4) Ejecute el siguiente comando para extraer los paquetes del proveedor
 ```sh
 make vendor
 ```
 
-5) Link or copy environment variables file
+5) Vincular o copiar archivo de variables de entorno
 ```sh
 ln -sf .env.development .env
 # - OR -
 cp .env.development .env
 ```
 
-6) Until this step you already can run this code by using this command
+6) Hasta este paso ya puedes ejecutar este código usando este comando
 ```sh
 make run
 ```
 
-7) *(Optional)* Use following command to build this code into binary spesific platform
+7) *(Opcional)* Utilice el siguiente comando para crear este código en una plataforma binaria específica
 ```sh
 make build
 ```
 
-8) *(Optional)* To make mass binaries distribution you can use following command
+8) *(Opcional)* Para realizar una distribución masiva de binarios puedes utilizar el siguiente comando
 ```sh
 make release
 ```
 
-9) Now it should be accessible in your machine by accessing `localhost:3000/api/v1/whatsapp` or `127.0.0.1:3000/api/v1/whatsapp`
+9) Ahora debería ser accesible en su máquina accediendo `localhost:3000/api/v1/whatsapp` o `127.0.0.1:3000/api/v1/whatsapp`
 
-10) Try to use integrated API docs that accesible in `localhost:3000/api/v1/whatsapp/docs/` or `127.0.0.1:3000/api/v1/whatsapp/docs/`
+10) Intente utilizar documentos API integrados a los que se pueda acceder en `localhost:3000/api/v1/whatsapp/docs/` o `127.0.0.1:3000/api/v1/whatsapp/docs/`
 
-## API Access
+## Acceso a la API
 
-You can access any endpoint under **HTTP_BASE_URL** environment variable which by default located at `.env` file.
+Puede acceder a cualquier punto final mediante la variable de entorno **HTTP_BASE_URL**, que de forma predeterminada se encuentra en el archivo `.env`.
 
-Integrated API Documentation can be accessed in `<HTTP_BASE_URL>/docs/` or by default it's in `localhost:3000/api/v1/whatsapp/docs/` or `127.0.0.1:3000/api/v1/whatsapp/docs/`
+Se puede acceder a la documentación API integrada en `<HTTP_BASE_URL>/docs/` o por defecto esta en `localhost:3000/api/v1/whatsapp/docs/` o `127.0.0.1:3000/api/v1/whatsapp/docs/`
 
-## Running The Tests
+## Ejecución de las pruebas
 
-Currently the test is not ready yet :)
+Actualmente, la prueba aún no está lista :)
 
-## Built With
+## Creado con
 
-* [Go](https://golang.org/) - Go Programming Languange
-* [Swag](https://github.com/swaggo/swag) - Go Annotations Converter to Swagger Documentation
-* [GoReleaser](https://github.com/goreleaser/goreleaser) - Go Automated Binaries Build
-* [Make](https://www.gnu.org/software/make/) - GNU Make Automated Execution
-* [Docker](https://www.docker.com/) - Application Containerization
+* [Go](https://golang.org/) - Lenguaje de programación Go
+* [Swag](https://github.com/swaggo/swag) - Documentación del convertidor de anotaciones Go a Swagger
+* [GoReleaser](https://github.com/goreleaser/goreleaser) - Creación automática de binarios
+* [Make](https://www.gnu.org/software/make/) - Ejecución automatizada de GNU Make
+* [Docker](https://www.docker.com/) - Contenerización de aplicaciones
 
-## Authors
+## Autores
 
-* **Dimas Restu Hidayanto** - *Initial Work* - [DimasKiddo](https://github.com/dimaskiddo)
+* **Dimas Restu Hidayanto** - *Trabajo Inicial* - [DimasKiddo](https://github.com/dimaskiddo)
 
-See also the list of [contributors](https://github.com/dimaskiddo/go-whatsapp-multidevice-rest/contributors) who participated in this project
+Véase también la lista de [Contribuyentes](https://github.com/dimaskiddo/go-whatsapp-multidevice-rest/contributors) who participated in this project
 
-## Annotation
+## Anotación
 
-You can seek more information for the make command parameters in the [Makefile](https://github.com/dimaskiddo/go-whatsapp-multidevice-rest/-/raw/master/Makefile)
+Puede buscar más información sobre los parámetros del comando make en [Makefile](https://github.com/dimaskiddo/go-whatsapp-multidevice-rest/-/raw/master/Makefile)
 
-## License
+## Licencia
 
 Copyright (C) 2022 Dimas Restu Hidayanto
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Se otorga permiso, sin cargo, a cualquier persona que obtenga una copia de este software y los archivos de documentación asociados (el "Software") para utilizar el Software sin restricciones, incluidos, entre otros, los derechos de uso, copia, modificación, fusión, publicación, distribución, sublicencia y/o venta de copias del Software, y para permitir que las personas a quienes se les proporciona el Software lo hagan, sujeto a las siguientes condiciones:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+El aviso de copyright anterior y este aviso de permiso se incluirán en todas las copias o partes sustanciales del Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+EL SOFTWARE SE PROPORCIONA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O IMPLÍCITA, INCLUYENDO, ENTRE OTRAS, LAS GARANTÍAS DE COMERCIABILIDAD, IDONEIDAD PARA UN PROPÓSITO PARTICULAR Y NO INFRACCIÓN. EN NINGÚN CASO LOS AUTORES O TITULARES DE LOS DERECHOS DE AUTOR SERÁN RESPONSABLES DE CUALQUIER RECLAMO, DAÑO U OTRA RESPONSABILIDAD, YA SEA EN UNA ACCIÓN CONTRACTUAL, AGRAVIO O DE OTRO MODO, QUE SURJA DE, A PARTIR DE O EN CONEXIÓN CON EL SOFTWARE O EL USO U OTRAS OPERACIONES EN EL SOFTWARE.

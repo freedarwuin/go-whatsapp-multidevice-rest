@@ -53,7 +53,7 @@ func (ev *EchoValidator) Validate(i interface{}) error {
 func main() {
 	var err error
 
-	// Intialize Cron
+	// Inicializar Cron
 	c := cron.New(cron.WithChain(
 		cron.Recover(cron.DiscardLogger),
 	), cron.WithSeconds())

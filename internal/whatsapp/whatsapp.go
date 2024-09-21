@@ -70,7 +70,7 @@ func Login(c echo.Context) error {
 
 	// If Return is Not QR Code But Reconnected
 	// Then Return OK With Reconnected Status
-	if qrCodeImage == "WhatsApp Client is Reconnected" {
+	if qrCodeImage == "El cliente de WhatsApp se ha vuelto a conectar" {
 		return router.ResponseSuccess(c, qrCodeImage)
 	}
 
@@ -90,7 +90,7 @@ func Login(c echo.Context) error {
         <p>
           <b>QR Code Scan</b>
           <br/>
-          Timeout in ` + strconv.Itoa(resLogin.Timeout) + ` Second(s)
+          Tiempo de espera en ` + strconv.Itoa(resLogin.Timeout) + ` Segundo (s)
         </p>
       </body>
     </html>`
@@ -98,7 +98,7 @@ func Login(c echo.Context) error {
 		return router.ResponseSuccessWithHTML(c, htmlContent)
 	}
 
-	return router.ResponseSuccessWithData(c, "Successfully Generated QR Code", resLogin)
+	return router.ResponseSuccessWithData(c, "Código QR generado con éxito", resLogin)
 }
 
 // PairPhone
@@ -125,7 +125,7 @@ func LoginPair(c echo.Context) error {
 
 	// If Return is not pairing code but Reconnected
 	// Then Return OK With Reconnected Status
-	if pairCode == "WhatsApp Client is Reconnected" {
+	if pairCode == "El cliente de WhatsApp se ha vuelto a conectar" {
 		return router.ResponseSuccess(c, pairCode)
 	}
 
@@ -133,7 +133,7 @@ func LoginPair(c echo.Context) error {
 	resPairing.PairCode = pairCode
 	resPairing.Timeout = pairCodeTimeout
 
-	return router.ResponseSuccessWithData(c, "Successfully Generated Pairing Code", resPairing)
+	return router.ResponseSuccessWithData(c, "Código de emparejamiento generado con éxito", resPairing)
 }
 
 // Logout
@@ -153,7 +153,7 @@ func Logout(c echo.Context) error {
 		return router.ResponseInternalError(c, err.Error())
 	}
 
-	return router.ResponseSuccess(c, "Successfully Logged Out")
+	return router.ResponseSuccess(c, "Se cerró sesión exitosamente")
 }
 
 // Registered
@@ -170,7 +170,7 @@ func Registered(c echo.Context) error {
 	remoteJID := strings.TrimSpace(c.QueryParam("msisdn"))
 
 	if len(remoteJID) == 0 {
-		return router.ResponseInternalError(c, "Missing Query Value MSISDN")
+		return router.ResponseInternalError(c, "Valor de consulta faltante MSISDN")
 	}
 
 	err := pkgWhatsApp.WhatsAppCheckRegistered(jid, remoteJID)
@@ -178,7 +178,7 @@ func Registered(c echo.Context) error {
 		return router.ResponseInternalError(c, err.Error())
 	}
 
-	return router.ResponseSuccess(c, "WhatsApp Personal ID is Registered")
+	return router.ResponseSuccess(c, "La identificación personal de WhatsApp está registrada")
 }
 
 // GetGroup
@@ -198,7 +198,7 @@ func GetGroup(c echo.Context) error {
 		return router.ResponseInternalError(c, err.Error())
 	}
 
-	return router.ResponseSuccessWithData(c, "Successfully List Joined Groups", group)
+	return router.ResponseSuccessWithData(c, "Listado exitoso de grupos a los que se unió", group)
 }
 
 // JoinGroup
@@ -218,7 +218,7 @@ func JoinGroup(c echo.Context) error {
 	reqGroupJoin.Link = strings.TrimSpace(c.FormValue("link"))
 
 	if len(reqGroupJoin.Link) == 0 {
-		return router.ResponseBadRequest(c, "Missing Form Value Link")
+		return router.ResponseBadRequest(c, "Enlace de valor de formulario faltante")
 	}
 
 	group, err := pkgWhatsApp.WhatsAppGroupJoin(jid, reqGroupJoin.Link)
@@ -226,7 +226,7 @@ func JoinGroup(c echo.Context) error {
 		return router.ResponseInternalError(c, err.Error())
 	}
 
-	return router.ResponseSuccessWithData(c, "Successfully Joined Group From Invitation Link", group)
+	return router.ResponseSuccessWithData(c, "Se unió al grupo con éxito a partir del enlace de invitación", group)
 }
 
 // LeaveGroup
@@ -246,7 +246,7 @@ func LeaveGroup(c echo.Context) error {
 	reqGroupLeave.GID = strings.TrimSpace(c.FormValue("groupid"))
 
 	if len(reqGroupLeave.GID) == 0 {
-		return router.ResponseBadRequest(c, "Missing Form Value Group ID")
+		return router.ResponseBadRequest(c, "ID de grupo de valores de formulario faltante")
 	}
 
 	err = pkgWhatsApp.WhatsAppGroupLeave(jid, reqGroupLeave.GID)
@@ -254,7 +254,7 @@ func LeaveGroup(c echo.Context) error {
 		return router.ResponseInternalError(c, err.Error())
 	}
 
-	return router.ResponseSuccess(c, "Successfully Leave Group By Group ID")
+	return router.ResponseSuccess(c, "Abandonar el grupo exitosamente por ID de grupo")
 }
 
 // SendText
@@ -277,11 +277,11 @@ func SendText(c echo.Context) error {
 	reqSendMessage.Message = strings.Replace(strings.TrimSpace(c.FormValue("message")), "\\n", "\n", -1)
 
 	if len(reqSendMessage.RJID) == 0 {
-		return router.ResponseBadRequest(c, "Missing Form Value MSISDN")
+		return router.ResponseBadRequest(c, "Valor de formulario faltante MSISDN")
 	}
 
 	if len(reqSendMessage.Message) == 0 {
-		return router.ResponseBadRequest(c, "Missing Form Value Message")
+		return router.ResponseBadRequest(c, "Mensaje de valor de formulario faltante")
 	}
 
 	var resSendMessage typWhatsApp.ResponseSendMessage
@@ -290,7 +290,7 @@ func SendText(c echo.Context) error {
 		return router.ResponseInternalError(c, err.Error())
 	}
 
-	return router.ResponseSuccessWithData(c, "Successfully Send Text Message", resSendMessage)
+	return router.ResponseSuccessWithData(c, "Enviar mensaje de texto con éxito", resSendMessage)
 }
 
 // SendLocation
